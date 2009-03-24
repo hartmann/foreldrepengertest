@@ -22,7 +22,6 @@ import java.io.IOException;
 /**
  * User: Vegard Hartmann
  * Date: 13.mar.2009
- * Time: 14:11:40
  */
 public class ForeldrepengerHovedTest {
 
