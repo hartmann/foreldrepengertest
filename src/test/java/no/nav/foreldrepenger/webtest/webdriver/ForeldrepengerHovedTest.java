@@ -31,7 +31,7 @@ public class ForeldrepengerHovedTest {
     public void setup() {
         //driver = new FirefoxDriver();
         HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
-        htmlUnitDriver.setJavascriptEnabled(true);
+        //htmlUnitDriver.setJavascriptEnabled(true);
         driver = htmlUnitDriver;
 
         PageMother.setDriver(driver);
