@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Ignore;
+import static org.junit.internal.matchers.StringContains.containsString;
+import static org.junit.Assert.assertThat;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -31,15 +33,13 @@ public class ForeldrepengerHovedTest {
     public void setup() {
         //driver = new FirefoxDriver();
         HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
-        //htmlUnitDriver.setJavascriptEnabled(true);
         driver = htmlUnitDriver;
 
         PageMother.setDriver(driver);
     }
 
     @Test
-   // @Ignore
-    public void foreldrepengerKunForMor() {
+    public void beregnForeldrepengerKunForMor() {
         driver.get("http://tjenester.nav.no/foreldrepengeveilederen/fpenger/fpengerWizard.do");
         ForeldreOgBarnPage foreldreOgBarnPage = PageMother.createForeldreOgBarnPage();
         foreldreOgBarnPage.velgHvemSomSkalTaUtForeldrepenger(MOR);
@@ -55,14 +55,6 @@ public class ForeldrepengerHovedTest {
         //sjekk at far ikke far noen uker
     }
 
-   // @Test
-    @Ignore
-    public void testHtmlUnit() throws IOException {
-        final WebClient webClient = new WebClient();
-            final HtmlPage page = webClient.getPage("http://tjenester.nav.no/foreldrepengeveilederen");
-        final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@class='NAVstepSelectedBody']").get(0);
-        System.out.println(div);
-    }
 
     @After
     public void teardown() {

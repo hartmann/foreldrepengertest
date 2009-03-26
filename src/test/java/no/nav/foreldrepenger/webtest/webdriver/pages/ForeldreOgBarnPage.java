@@ -15,13 +15,13 @@ import java.util.List;
  * Time: 14:17:45
  */
 public class ForeldreOgBarnPage {
-
     public enum ForeldrepengerUttak {
         MOR_OG_FAR("baademorogfar"),
         MOR("Kunmor"),
         FAR("Kunfar"),
         ALENEMOR("Alenemor"),
         ALENEFAR("Alenefar");
+
 
         private final String id;
 
@@ -33,6 +33,7 @@ public class ForeldreOgBarnPage {
         public String toString() {
             return id;
         }
+
     }
 
     public enum TypeFodsel {
@@ -49,6 +50,7 @@ public class ForeldreOgBarnPage {
         public String toString() {
             return id;
         }
+
     }
 
     private WebDriver driver;
@@ -61,6 +63,13 @@ public class ForeldreOgBarnPage {
     @CacheLookup
     private WebElement gaaVidereButton;
 
+    @FindBy(how = How.XPATH, using = "//img[contains(@alt,'Kun mor har rett')]")
+    @CacheLookup
+    private WebElement kunMorHjelpButton;
+
+    @FindBy(how = How.ID, using = "NAVhelpTxt")
+    private WebElement hjelpetekstContainer;
+
     public ForeldreOgBarnPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -68,6 +77,14 @@ public class ForeldreOgBarnPage {
     public void velgHvemSomSkalTaUtForeldrepenger(ForeldrepengerUttak hvem) {
         WebElement radiobutton = driver.findElement(By.xpath("//input[@id='" + hvem + "']"));
         radiobutton.setSelected();
+    }
+
+    public String getHjelpetekst() {
+        return hjelpetekstContainer.getText();
+    }
+
+    public void visHjelpForKunMorHarRett() {
+        kunMorHjelpButton.click();
     }
 
     public void velgFodselEllerAdopsjon(TypeFodsel typeFodsel) {

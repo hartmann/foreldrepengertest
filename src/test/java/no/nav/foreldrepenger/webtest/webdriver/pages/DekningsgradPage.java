@@ -41,7 +41,6 @@ public class DekningsgradPage {
 
 
     public ResultatPage velgDekningsgradOgGaaVidere(Dekningsgrad dekningsgrad) {
-        System.out.println(driver.getCurrentUrl());
         WebElement radioButton = driver.findElement(By.id(dekningsgrad.id()));
         radioButton.setSelected();
         gaaVidereButton.click();
