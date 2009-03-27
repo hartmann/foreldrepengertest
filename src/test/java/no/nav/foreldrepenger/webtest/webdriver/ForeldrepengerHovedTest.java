@@ -9,6 +9,7 @@ import static org.junit.Assert.assertThat;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.apache.log4j.PropertyConfigurator;
 import no.nav.foreldrepenger.webtest.webdriver.pages.*;
 import static no.nav.foreldrepenger.webtest.webdriver.pages.DekningsgradPage.Dekningsgrad.HUNDRE;
 import static no.nav.foreldrepenger.webtest.webdriver.pages.InntektForFodselPage.Arbeidskategori.FAST_STILLING;
@@ -18,8 +19,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-import java.net.MalformedURLException;
-import java.io.IOException;
+import java.net.URL;
+
 
 /**
  * User: Vegard Hartmann
@@ -34,7 +35,7 @@ public class ForeldrepengerHovedTest {
         //driver = new FirefoxDriver();
         HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
         driver = htmlUnitDriver;
-
+    
         PageMother.setDriver(driver);
     }
 
