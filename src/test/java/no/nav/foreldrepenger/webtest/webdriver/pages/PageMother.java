@@ -35,6 +35,6 @@ public class PageMother {
     }
 
     public static ResultatPage createResultatPage() {
-        return new ResultatPage();
+        return PageFactory.initElements(driver, ResultatPage.class);
     }
 }

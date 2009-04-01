@@ -6,10 +6,13 @@ import org.junit.After;
 import org.junit.Ignore;
 import static org.junit.internal.matchers.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.apache.log4j.PropertyConfigurator;
+import static org.hamcrest.CoreMatchers.not;
 import no.nav.foreldrepenger.webtest.webdriver.pages.*;
 import static no.nav.foreldrepenger.webtest.webdriver.pages.DekningsgradPage.Dekningsgrad.HUNDRE;
 import static no.nav.foreldrepenger.webtest.webdriver.pages.InntektForFodselPage.Arbeidskategori.FAST_STILLING;
@@ -32,9 +35,9 @@ public class ForeldrepengerHovedTest {
 
     @Before
     public void setup() {
-        //driver = new FirefoxDriver();
-        HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
-        driver = htmlUnitDriver;
+        driver = new FirefoxDriver();
+        //HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver();
+        //driver = htmlUnitDriver;
     
         PageMother.setDriver(driver);
     }
@@ -52,8 +55,19 @@ public class ForeldrepengerHovedTest {
         inntektForFodselPage.registrerManedsInntektForMor(25000);
         DekningsgradPage dekningsgradPage = inntektForFodselPage.gaaVidere();
         ResultatPage resultatPage = dekningsgradPage.velgDekningsgradOgGaaVidere(HUNDRE);
-        //sjekk at mor far foreldrepenger
-        //sjekk at far ikke far noen uker
+        System.out.println(driver.getPageSource());
+        assertThat(resultatPage.getForeldrepengerPerUkeMor(), not(0));
+
+   }
+
+    @Test
+    public void skalKunneGaTilTidligereSteg(){
+        driver.get("http://tjenester.nav.no/foreldrepengeveilederen/fpenger/fpengerWizard.do");
+        ForeldreOgBarnPage foreldreOgBarnPage = PageMother.createForeldreOgBarnPage();
+        foreldreOgBarnPage.velgHvemSomSkalTaUtForeldrepenger(MOR);
+        InntektForFodselPage inntektForFodselPage = foreldreOgBarnPage.gaaVidere();
+        foreldreOgBarnPage = inntektForFodselPage.endreForeldreOgBarnPage();
+        assertTrue(foreldreOgBarnPage.isCurrentPage());
     }
 
 

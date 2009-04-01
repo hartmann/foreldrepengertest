@@ -1,9 +1,6 @@
 package no.nav.foreldrepenger.webtest.webdriver.pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.How;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.CacheLookup;
 
@@ -22,8 +19,8 @@ public class ForeldreOgBarnPage {
         ALENEMOR("Alenemor"),
         ALENEFAR("Alenefar");
 
-
         private final String id;
+
 
         ForeldrepengerUttak(String id) {
             this.id = id;
@@ -57,7 +54,7 @@ public class ForeldreOgBarnPage {
 
     @FindBy(how = How.NAME, using = "antallBarn")
     @CacheLookup
-    private WebElement antallBarnSelect;
+    private RenderedWebElement antallBarnSelect;
 
     @FindBy(how = How.XPATH, using = "//input[contains(@value,'videre')]")
     @CacheLookup
@@ -104,6 +101,10 @@ public class ForeldreOgBarnPage {
         if (!found) {
             throw new IllegalArgumentException("The given number of childs was not in the select list: " + antallBarn);
         }
+    }
+
+    public boolean isCurrentPage() {
+       return antallBarnSelect.isDisplayed();
     }
 
     public InntektForFodselPage gaaVidere() {

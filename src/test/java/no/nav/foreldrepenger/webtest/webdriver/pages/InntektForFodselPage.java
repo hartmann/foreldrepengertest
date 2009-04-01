@@ -15,7 +15,6 @@ import java.util.List;
  * Time: 15:42:06
  */
 public class InntektForFodselPage {
-
     public enum Arbeidskategori {
         FAST_STILLING("1"),
         KORTE_ARBEIDSFORHOLD("2"),
@@ -61,16 +60,20 @@ public class InntektForFodselPage {
     @CacheLookup
     private WebElement manedsInntektForMor;
 
+    @FindBy(how = How.XPATH, using = "//div[@id='NAVtrekkspill']/form/div/a")
+    @CacheLookup
+    private WebElement endreForeldreOgBarnPageLink;
+
     public InntektForFodselPage(WebDriver driver) {
         this.driver = driver;
     }
-
 
     public void registrerInntektSiste3AarForMor(int inntekt1, int inntekt2, int inntekt3) {
         inntektMor1.sendKeys(String.valueOf(inntekt1));
         inntektMor2.sendKeys(String.valueOf(inntekt2));
         inntektMor3.sendKeys(String.valueOf(inntekt3));
     }
+
 
     public void registrerManedsInntektForMor(int manedsInntekt) {
         manedsInntektForMor.sendKeys(String.valueOf(manedsInntekt));
@@ -93,5 +96,10 @@ public class InntektForFodselPage {
     public DekningsgradPage gaaVidere() {
         gaaVidereButton.click();
         return PageMother.createDekningsgradPage();
+    }
+
+    public ForeldreOgBarnPage endreForeldreOgBarnPage() {
+        endreForeldreOgBarnPageLink.click();
+        return PageMother.createForeldreOgBarnPage();
     }
 }
