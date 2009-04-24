@@ -22,7 +22,7 @@
     </repositories>
 
     <properties>
-        <webdriver.version>0.6.685</webdriver.version>
+        <webdriver.version>0.6.964</webdriver.version>
     </properties>
 
     <dependencies>
